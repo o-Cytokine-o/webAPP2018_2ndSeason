@@ -24,6 +24,7 @@ class ItemTable extends Migration
             $table->string('ammoK'); //武器の弾の種類
             $table->unsignedInteger('amloaded'); //武器の装弾数
             $table->timestamps();
+            //
         });
     }
 
