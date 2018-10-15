@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/ECsite', function () {
-    return view('ECsite');
+Route::get('/ecsite', function () {
+    $items = DB::select("SELECT * FROM items");
+    return view('ECsite',[
+        "items" => $items
+    ]);
 });
