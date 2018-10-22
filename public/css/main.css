@@ -1880,9 +1880,6 @@ input.num-product::-webkit-inner-spin-button {
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
   transition: all 0.4s;
-
-  visibility: hidden;
-  opacity: 0;
 }
 
 .overlay-modal1 {
@@ -1892,7 +1889,7 @@ input.num-product::-webkit-inner-spin-button {
   height: 100%;
   top: 0;
   left: 0;
-  background: #000;
+  
   opacity: 0.8;
 }
 
