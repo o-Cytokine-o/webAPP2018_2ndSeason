@@ -72,7 +72,7 @@
 				<nav class="limiter-menu-desktop container">
 					
 					<!-- Logo desktop -->		
-					<a href="#" class="logo">
+					<a href="/ecsite" class="logo">
 						<h3>HCLI</h3>
 						<!--<img src="images/icons/logo-01.png" alt="IMG-LOGO">-->
 					</a>
@@ -753,9 +753,12 @@
 						<div class="block2-pic hov-img0">
 							<img src="<?=$item->img?>" hight="563" alt="IMG-PRODUCT">
 
-							<a href="item/<?=$item->id?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-								Quick View
-							</a>
+							
+							<form action="/cart/add" method="post">
+								<?= csrf_field()?>
+								<input type="hidden" name="item_id" value="<?=$item->id?>"> 
+								<input type="submit" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1" value="Add to cart">
+							</form>
 						</div>
 
 						<div class="block2-txt flex-w flex-t p-t-14">
@@ -770,10 +773,11 @@
 							</div>
 
 							<div class="block2-txt-child2 flex-r p-t-3">
-								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
-									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
-								</a>
+								<form action="/cart/add" method="post">
+								<?= csrf_field()?>
+								<input type="hidden" name="item_id" value="<?=$item->id?>"> 
+								<input type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" value="Add to cart">
+							</form>
 							</div>
 						</div>
 					</div>
