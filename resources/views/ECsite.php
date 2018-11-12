@@ -660,11 +660,12 @@
 							</div>
 
 							<div class="block2-txt-child2 flex-r p-t-3">
-								<form action="/cart/add" method="post">
-								<?= csrf_field()?>
-								<input type="hidden" name="item_id" value="<?=$item->id?>"> 
-								<input type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" value="Add to cart">
-							</form>
+								
+							<a href="item/<?=$item->id?>">
+								<div class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+								Add to cart
+								</div>
+							</a>
 							</div>
 						</div>
 					</div>

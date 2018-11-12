@@ -304,13 +304,9 @@
 			</span>
 		</div>
 	</div>
-	<form action="/cart/clear" method="post">
-	<?= csrf_field()?>	
-	<input type="hidden" name="crt" value=""> 
-	<input type="submit" class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5" value="Clear Cart">
-	</form>
+	
 	<!-- Shoping Cart -->
-	<form action="/cart/update" class="bg0 p-t-75 p-b-85">
+	<div class="bg0 p-t-75 p-b-85">
 		
 		<div class="container">
 			<div class="row">
@@ -327,7 +323,9 @@
 								</tr>
 
 			<!---------------------------------------------------- 商品  ---->
+							<?php $i=0; ?>
 							<?php foreach($cartItems as $cartItem): ?>
+							<?php $i++;?>
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
@@ -338,18 +336,25 @@
 									<td class="column-3">&yen;<?=$cartItem->price?></td>
 									<td class="column-4">
 										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
+											<div class="">
+												
 											</div>
 											
 											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="1">
 											
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
+											<div class="">
+												
 											</div>
 										</div>
 									</td>
-									<td class="column-5">$ 36.00</td>
+									<td class="column-5">$ 36.00<?=$i?></td>
+									<td>
+										<form action="/cart/delete">
+											<?= csrf_field()?>
+											<input type="hidden" name="delete_id" value="<?=$i?>"> 
+											<input type="submit" value="削除">
+										</form>
+									</td>
 								</tr>
 							<?php endforeach; ?> 
 
@@ -362,12 +367,15 @@
 								
 								
 									
-									<input type="hidden" name="crt" value=""> 
-									<input type="submit" class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5" value="Clear Cart">
+							<form action="/cart/clear" method="post">
+							<?= csrf_field()?>	
+							<input type="hidden" name="crt" value=""> 
+							<input type="submit" class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5" value="Clear Cart">
+							</form>
 								
 							</div>
 
-							<input type="submit" class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10" value="Update Cart">
+							<!-- <input type="submit" class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10" value="Update Cart"> -->
 								
 							
 						</div>
@@ -452,14 +460,16 @@
 							</div>
 						</div>
 
-						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+						
+						<a href="/order_page"><button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
 							Proceed to Checkout
 						</button>
+						</a>
 					</div>
 				</div>
 			</div>
 		</div>
-	</form>
+	</div>
 		
 	
 		

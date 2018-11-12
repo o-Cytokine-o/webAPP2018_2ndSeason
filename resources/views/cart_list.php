@@ -73,7 +73,8 @@
 					
 					<!-- Logo desktop -->		
 					<a href="/ecsite" class="logo">
-						<img src="/images/icons/logo-01.png" alt="IMG-LOGO">
+						<h3>HCLI</h3>
+						<!--<img src="/images/icons/logo-01.png" alt="IMG-LOGO">-->
 					</a>
 
 					<!-- Menu desktop -->

@@ -40,7 +40,8 @@ Route::post("/cart/add",function(){
     if(count($items) > 0){
         // セッションにデータを追加して格納
         $cartItems = session()->get("CART_ITEMS",[]);
-        $cartItems[] =$items[0];
+        $cartItems[] = $items[0]
+            ;
         session()->put("CART_ITEMS",$cartItems);
         return redirect("/cart/list");    
     }else{
@@ -63,28 +64,74 @@ Route::post("/cart/clear",function(){
     return redirect("/cart/list");
 });
 
+Route::post("/cart/delete",function(){
+    $delete_id = request()->get("delete_id");
+    $cartItems = session()->get("CART_ITEMS",[]);
+    foreach($cartItems as $key){
+        if($key->id==$delete_id){
+            array_splice($cartItems,$delete_id,1);
+        }
+    }
+    session()->put("CART_ITEMS",$cartItems);
+    return redirect("/cart/list"); 
+});
+
 Route::post("/cart/add/all",function($qat){
     // フォームから IDを読み込みDBへ問い合わせる
     $id = request()->get("item_id");
     $items = DB::select("SELECT * FROM items where id = ?",[$id]);
     $fg=false;
+    $much_id=0;
+    $i=0;
     $qty=request()->get("num-product1");
 
     
     if(count($items) > 0){
             // セッションにデータを追加して格納
             $cartItems = session()->get("CART_ITEMS",[]);
+            
             foreach($cartItems as $cartItem){
-                if(cartItem->id==$id){
+                if($cartItem->id==$id){
                     $fg=true;
+                    $much_id=$i;
+                    $amount=$cartItems->amount;
                 }
+                else{
+                    
+                }
+                $i++;
             }
-            $cartItems[] = [
-                $items[0],
+            $cartItems[$much_id] = [
+                'items'=>$items[0],
+                'amount'=>($qty + $amount)
         ];
         session()->put("CART_ITEMS",$cartItems);
         return redirect("/cart/list");    
     }else{
         return abort(404);
     }        
+});
+
+Route::get("/order_page",function(){
+    return view("order_page");
+});
+
+Route::post("/order",function(){
+
+    // ここで カートの中身をDBに保存する    
+    DB::insert("INSERT into orders (name,address,tel,email,orders) VALUES (?,?,?,?,?)",[
+        request()->get("name"),
+        request()->get("address"),
+        request()->get("tel"),
+        request()->get("email"),
+        json_encode(session()->get("CART_ITEMS"))
+    ]);
+    
+    session()->forget("CART_ITEMS"); // ここでカートを空に
+   
+    return redirect("/order/thanks");
+});
+
+Route::get("/order/thanks",function(){
+    return view("order_thanks");
 });
