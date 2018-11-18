@@ -252,10 +252,10 @@
 			
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
-					<?php foreach($cartItems as $cartItem): ?>
+					<?php foreach($cartItems as $cartItem=>$value): ?>
 						<li class="header-cart-item flex-w flex-t m-b-12">
 							<div class="header-cart-item-img">
-								<img src="<?=$cartItem->img?>" alt="IMG">
+								<img src="<?=$value->item->img?>" alt="IMG">
 							</div>
 
 							<div class="header-cart-item-txt p-t-8">
@@ -329,7 +329,7 @@
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
-											<img src="<?=$cartItem->img?>" alt="IMG">
+											<img src="<?=$cartItem->item->img?>" alt="IMG">
 										</div>
 									</td>
 									<td class="column-2"><?=$cartItem->name?></td>
@@ -349,9 +349,9 @@
 									</td>
 									<td class="column-5">$ 36.00<?=$i?></td>
 									<td>
-										<form action="/cart/delete">
+										<form action="/cart/delete" method="post">
 											<?= csrf_field()?>
-											<input type="hidden" name="delete_id" value="<?=$i?>"> 
+											<input type="hidden" name="delete_id" value="<?=$cartItem->id?>"> 
 											<input type="submit" value="削除">
 										</form>
 									</td>

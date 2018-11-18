@@ -16,7 +16,8 @@ Route::get('/ecsite', function () {
     $cartItems = session()->get("CART_ITEMS",[]);
     return view('ECsite',[
         "items" => $items,
-        "cartItems" => $cartItems
+        "cartItems" => $cartItems,
+        
     ]);
 });
 
@@ -36,12 +37,14 @@ Route::get("/item/{id}",function($id){
 Route::post("/cart/add",function(){
     // フォームから IDを読み込みDBへ問い合わせる
     $id = request()->get("item_id");
+    /* $items = DB::where('id', $id)->get(); */
     $items = DB::select("SELECT * FROM items where id = ?",[$id]);
     if(count($items) > 0){
         // セッションにデータを追加して格納
         $cartItems = session()->get("CART_ITEMS",[]);
-        $cartItems[] = $items[0]
-            ;
+        $cartItems[] = [
+            'item'=>$items[0]
+            ];
         session()->put("CART_ITEMS",$cartItems);
         return redirect("/cart/list");    
     }else{
@@ -67,11 +70,12 @@ Route::post("/cart/clear",function(){
 Route::post("/cart/delete",function(){
     $delete_id = request()->get("delete_id");
     $cartItems = session()->get("CART_ITEMS",[]);
-    foreach($cartItems as $key){
+    array_splice($cartItems,$delete_id,1);
+    /* foreach($cartItems as $key){
         if($key->id==$delete_id){
             array_splice($cartItems,$delete_id,1);
         }
-    }
+    } */
     session()->put("CART_ITEMS",$cartItems);
     return redirect("/cart/list"); 
 });
@@ -90,7 +94,10 @@ Route::post("/cart/add/all",function($qat){
             // セッションにデータを追加して格納
             $cartItems = session()->get("CART_ITEMS",[]);
             
-            foreach($cartItems as $cartItem){
+            if(in_array('$id',$cartItems['item'])){
+                
+            }
+            /* foreach($cartItems as $cartItem){
                 if($cartItem->id==$id){
                     $fg=true;
                     $much_id=$i;
@@ -100,7 +107,7 @@ Route::post("/cart/add/all",function($qat){
                     
                 }
                 $i++;
-            }
+            } */
             $cartItems[$much_id] = [
                 'items'=>$items[0],
                 'amount'=>($qty + $amount)

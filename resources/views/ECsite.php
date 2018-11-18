@@ -262,7 +262,7 @@
 					<?php foreach($cartItems as $cartItem): ?>
 						<li class="header-cart-item flex-w flex-t m-b-12">
 							<div class="header-cart-item-img">
-								<img src="<?=$cartItem->img?>" alt="IMG">
+								<img src="" alt="IMG">
 							</div>
 
 							<div class="header-cart-item-txt p-t-8">
@@ -652,6 +652,7 @@
 							<div class="block2-txt-child1 flex-col-l ">
 								<a href="item/<?=$item->id?>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 									<?=$item->name?>
+									
 								</a>
 
 								<span class="stext-105 cl3">
@@ -671,7 +672,8 @@
 					</div>
 				</div>
                
-            <?php endforeach; ?> 
+			<?php endforeach; ?> 
+			
                 
 <!------------------------ コンテンツend ------------------> 
 
