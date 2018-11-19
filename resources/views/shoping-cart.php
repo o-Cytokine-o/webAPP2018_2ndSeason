@@ -126,7 +126,7 @@
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
 			<div class="logo-mobile">
-				<a href="index.html"><img src="/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+				<a href="/ecsite">HCLI</a>
 			</div>
 
 			<!-- Icon header -->
@@ -185,7 +185,7 @@
 
 			<ul class="main-menu-m">
 				<li>
-					<a href="index.html">Home</a>
+					<a href="/ecsite">Home</a>
 					<ul class="sub-menu-m">
 						<li><a href="index.html">Homepage 1</a></li>
 						<li><a href="home-02.html">Homepage 2</a></li>
@@ -242,7 +242,7 @@
 		<div class="header-cart flex-col-l p-l-65 p-r-25">
 			<div class="header-cart-title flex-w flex-sb-m p-b-8">
 				<span class="mtext-103 cl2">
-					Your Cart
+					Your Cart 
 				</span>
 
 				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
@@ -252,19 +252,19 @@
 			
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
-					<?php foreach($cartItems as $cartItem=>$value): ?>
+					<?php foreach($cartItems as $cartItem): ?>
 						<li class="header-cart-item flex-w flex-t m-b-12">
 							<div class="header-cart-item-img">
-								<img src="<?=$value->item->img?>" alt="IMG">
+								<?=$cartItem["item"]->img?>
 							</div>
 
 							<div class="header-cart-item-txt p-t-8">
 								<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								<?=$cartItem->name?>
+								<?=$cartItem["item"]->name?>
 								</a>
 
 								<span class="header-cart-item-info">
-								&yen;<?=$cartItem->price?>
+								&yen;price
 								</span>
 							</div>
 						</li>
@@ -289,7 +289,7 @@
 			</div>
 		</div>
 	</div>
-
+	
 
 	<!-- breadcrumb -->
 	<div class="container">
@@ -324,34 +324,24 @@
 
 			<!---------------------------------------------------- 商品  ---->
 							<?php $i=0; ?>
-							<?php foreach($cartItems as $cartItem): ?>
+							<?php foreach($cartItems as $cartItem=>$v): ?>
 							<?php $i++;?>
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
-											<img src="<?=$cartItem->item->img?>" alt="IMG">
+											<img src="<?=$v["item"]->img?>" alt="IMG">
 										</div>
 									</td>
-									<td class="column-2"><?=$cartItem->name?></td>
-									<td class="column-3">&yen;<?=$cartItem->price?></td>
+									<td class="column-2"><?=$v["item"]->name?></td>
+									<td class="column-3">&yen;<?=$v["item"]->price?></td>
 									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div class="">
-												
-											</div>
-											
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="1">
-											
-											<div class="">
-												
-											</div>
-										</div>
+										<?=$v["amount"]?>
 									</td>
-									<td class="column-5">$ 36.00<?=$i?></td>
+									<td class="column-5">$ 36.00</td>
 									<td>
 										<form action="/cart/delete" method="post">
 											<?= csrf_field()?>
-											<input type="hidden" name="delete_id" value="<?=$cartItem->id?>"> 
+											<input type="hidden" name="delete_id" value="<?=$v["item"]->id?>">
 											<input type="submit" value="削除">
 										</form>
 									</td>
@@ -361,6 +351,7 @@
 			<!-------------------------------------------------------------- --->
 							</table>
 						</div>
+						<?php var_dump($cartItems); ?>
 
 						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
 							<div class="flex-w flex-m m-r-20 m-tb-5">

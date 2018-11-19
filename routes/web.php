@@ -43,8 +43,9 @@ Route::post("/cart/add",function(){
         // セッションにデータを追加して格納
         $cartItems = session()->get("CART_ITEMS",[]);
         $cartItems[] = [
-            'item'=>$items[0]
-            ];
+        'item'=>$items[0],
+        'amount'=>1
+        ];
         session()->put("CART_ITEMS",$cartItems);
         return redirect("/cart/list");    
     }else{
@@ -70,48 +71,51 @@ Route::post("/cart/clear",function(){
 Route::post("/cart/delete",function(){
     $delete_id = request()->get("delete_id");
     $cartItems = session()->get("CART_ITEMS",[]);
-    array_splice($cartItems,$delete_id,1);
-    /* foreach($cartItems as $key){
-        if($key->id==$delete_id){
-            array_splice($cartItems,$delete_id,1);
+    $i=0;
+
+    foreach($cartItems as $cartItem=>$key){
+        if($key["item"]->id==$delete_id){
+            array_splice($cartItems,$i,1);
         }
-    } */
+        $i++;
+    }
     session()->put("CART_ITEMS",$cartItems);
     return redirect("/cart/list"); 
 });
 
-Route::post("/cart/add/all",function($qat){
+Route::post("/cart/add/all",function(){
     // フォームから IDを読み込みDBへ問い合わせる
     $id = request()->get("item_id");
+    $qty = request()->get("qty");
     $items = DB::select("SELECT * FROM items where id = ?",[$id]);
     $fg=false;
-    $much_id=0;
     $i=0;
-    $qty=request()->get("num-product1");
 
     
     if(count($items) > 0){
-            // セッションにデータを追加して格納
-            $cartItems = session()->get("CART_ITEMS",[]);
-            
-            if(in_array('$id',$cartItems['item'])){
+        // セッションにデータを追加して格納
+        $cartItems = session()->get("CART_ITEMS",[]);
+        
+        if($fg==false){
+            foreach($cartItems as $cartItem=>$v){
                 
-            }
-            /* foreach($cartItems as $cartItem){
-                if($cartItem->id==$id){
-                    $fg=true;
-                    $much_id=$i;
-                    $amount=$cartItems->amount;
+                if($v["item"]->id==$items[0]->id){
+                    $cartItems[$cartItem]["amount"]+=$qty;
                 }
                 else{
-                    
+                    $cartItems[] = [
+                        'item'=>$items[0],
+                        'amount'=>$qty
+                        ];
                 }
-                $i++;
-            } */
-            $cartItems[$much_id] = [
-                'items'=>$items[0],
-                'amount'=>($qty + $amount)
-        ];
+            }
+        }else{
+            $cartItems[] = [
+                'item'=>$items[0],
+                'amount'=>$qty
+                ];
+        }
+        
         session()->put("CART_ITEMS",$cartItems);
         return redirect("/cart/list");    
     }else{

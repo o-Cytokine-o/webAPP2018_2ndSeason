@@ -262,16 +262,16 @@
 					<?php foreach($cartItems as $cartItem): ?>
 						<li class="header-cart-item flex-w flex-t m-b-12">
 							<div class="header-cart-item-img">
-								<img src="" alt="IMG">
+								<img src="<?=$cartItem["item"]->img?>" alt="IMG">
 							</div>
 
 							<div class="header-cart-item-txt p-t-8">
 								<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								<?=$cartItem->name?>
+								<?=$cartItem["item"]->name?>
 								</a>
 
 								<span class="header-cart-item-info">
-								&yen;<?=$cartItem->price?>
+								&yen;<?=$cartItem["item"]->price?>
 								</span>
 							</div>
 						</li>
