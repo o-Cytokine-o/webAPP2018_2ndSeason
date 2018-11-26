@@ -247,27 +247,33 @@
 	<?=csrf_field()?>
 	
 		<div class="form-group row">
-			<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">名前</label>
+			<label for="form-name" class="col-sm-2 col-form-label col-form-label-sm">名前</label>
 			<div class="col-sm-10">
-			<input type="text" class="form-control form-control-sm" id="colFormLabelSm"  name="name" placeholder="">
+			<input type="text" class="form-control form-control-sm" id="form-name"  name="name" placeholder="">
 			</div>
 		</div>
 		<div class="form-group row">
-			<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">住所</label>
+			<label for="form-post" class="col-sm-2 col-form-label col-form-label-sm">住所</label>
 			<div class="col-sm-10">
-			<input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="address" placeholder="">
+			<input type="text" class="form-control form-control-sm" id="form-post" name="post" placeholder="">
 			</div>
 		</div>
 		<div class="form-group row">
-			<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">電話番号</label>
+			<label for="form-address" class="col-sm-2 col-form-label col-form-label-sm">住所</label>
 			<div class="col-sm-10">
-			<input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="tel" placeholder="">
+			<input type="text" class="form-control form-control-sm" id="form-address" name="address" placeholder="">
 			</div>
 		</div>
 		<div class="form-group row">
-			<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
+			<label for="form-tel" class="col-sm-2 col-form-label col-form-label-sm">電話番号</label>
 			<div class="col-sm-10">
-			<input type="email" class="form-control form-control-sm" id="colFormLabelSm" name="email" placeholder="">
+			<input type="text" class="form-control form-control-sm" id="form-tel" name="tel" placeholder="">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="form-email" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
+			<div class="col-sm-10">
+			<input type="email" class="form-control form-control-sm" id="form-email" name="email" placeholder="">
 			</div>
 		  </div>
 		  

@@ -17,12 +17,12 @@ class ItemTable extends Migration
             $table->increments('id');
             $table->string('name'); //武器名
             $table->string('img'); // 武器画像
-            $table->string('description'); // 武器の説明文
+            $table->string('description')->nullable(true); // 武器の説明文
             $table->unsignedInteger('price'); //　武器の価格
-            $table->unsignedInteger('weight'); //　武器の重量
-            $table->string('category'); //武器のカテゴリー
-            $table->string('ammoK'); //武器の弾の種類
-            $table->unsignedInteger('amloaded'); //武器の装弾数
+            $table->unsignedInteger('weight')->nullable(true); //　武器の重量
+            $table->string('category')->nullable(true); //武器のカテゴリー
+            $table->string('ammoK')->nullable(true); //武器の弾の種類
+            $table->unsignedInteger('amloaded')->nullable(true); //武器の装弾数
             $table->timestamps();
             //
         });

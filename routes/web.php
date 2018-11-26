@@ -96,7 +96,7 @@ Route::post("/cart/add/all",function(){
         // セッションにデータを追加して格納
         $cartItems = session()->get("CART_ITEMS",[]);
         
-        if($fg==false){
+        if(!empty($cartItems)){
             foreach($cartItems as $cartItem=>$v){
                 
                 if($v["item"]->id==$items[0]->id){
@@ -126,12 +126,27 @@ Route::post("/cart/add/all",function(){
 Route::get("/order_page",function(){
     return view("order_page");
 });
+Route::post("/order_page",function(Request $request){
+    $request->validate([
+        'name'=>'required|string',
+        'post'=>'required|regex:/^[0-9]{3}-[0-9]{4}$/',
+        'address'=>'required|string',
+        'tel'=>'required|regex:/^[0-9]{3}-[0-9]{4}-[0-9]{4}$',
+        'email'=>'required|email'
+    ]);
+    /* if ($validator->fails()) {
+        return view('/order_page',[
+
+        ]); */
+    
+});
 
 Route::post("/order",function(){
 
     // ここで カートの中身をDBに保存する    
-    DB::insert("INSERT into orders (name,address,tel,email,orders) VALUES (?,?,?,?,?)",[
+    DB::insert("INSERT into orders (name,post,address,tel,email,orders) VALUES (?,?,?,?,?,?)",[
         request()->get("name"),
+        request()->get("post"),
         request()->get("address"),
         request()->get("tel"),
         request()->get("email"),
@@ -146,3 +161,4 @@ Route::post("/order",function(){
 Route::get("/order/thanks",function(){
     return view("order_thanks");
 });
+

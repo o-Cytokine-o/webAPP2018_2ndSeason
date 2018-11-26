@@ -351,7 +351,7 @@
 			<!-------------------------------------------------------------- --->
 							</table>
 						</div>
-						<?php var_dump($cartItems); ?>
+						
 
 						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
 							<div class="flex-w flex-m m-r-20 m-tb-5">

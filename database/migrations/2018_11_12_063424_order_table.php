@@ -17,6 +17,7 @@ class OrderTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name'); //顧客名
+            $table->string('post'); //郵便番号
             $table->string('address'); // 住所
             $table->string('tel'); // 電話番号
             $table->string('email'); // Email
