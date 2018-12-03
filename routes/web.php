@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Http\Request;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -126,24 +129,31 @@ Route::post("/cart/add/all",function(){
 Route::get("/order_page",function(){
     return view("order_page");
 });
-Route::post("/order_page",function(Request $request){
+
+Route::post("/order",function(Request $request){
     $request->validate([
         'name'=>'required|string',
         'post'=>'required|regex:/^[0-9]{3}-[0-9]{4}$/',
         'address'=>'required|string',
-        'tel'=>'required|regex:/^[0-9]{3}-[0-9]{4}-[0-9]{4}$',
+        'tel'=>'required|regex:/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/',
         'email'=>'required|email'
+    ],[
+        'name.required'=>'名前は必須です。',
+        'name.string'=>'入力した情報は正しくありません。',
+        'post.required' => '郵便番号は必須です。',
+        'post.regex' => '入力した形式が正しくありません（例：256-2048）',
+        'address.required'=>'住所は必須です。',
+        'address.string'=>'入力した情報は正しくありません。',
+        'tel.required'=>'電話番号は必須です。',
+        'tel.regex'=>'入力した形式が正しくありません（例：404-1024-6553）',
+        'email.required'=>'Emailは必須です。',
+        'email.email'=>'入力した情報に誤りがあります'
     ]);
     /* if ($validator->fails()) {
         return view('/order_page',[
-
-        ]); */
-    
-});
-
-Route::post("/order",function(){
-
-    // ここで カートの中身をDBに保存する    
+        ]);
+    } */
+    // ここで カートの中身をDBに保存する
     DB::insert("INSERT into orders (name,post,address,tel,email,orders) VALUES (?,?,?,?,?,?)",[
         request()->get("name"),
         request()->get("post"),
@@ -157,6 +167,8 @@ Route::post("/order",function(){
    
     return redirect("/order/thanks");
 });
+
+
 
 Route::get("/order/thanks",function(){
     return view("order_thanks");

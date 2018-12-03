@@ -315,11 +315,12 @@
 						<div class="wrap-table-shopping-cart">
 							<table class="table-shopping-cart">
 								<tr class="table_head">
-									<th class="column-1">Product</th>
-									<th class="column-2"></th>
-									<th class="column-3">Price</th>
-									<th class="column-4">Quantity</th>
-									<th class="column-5">Total</th>
+									<th class="column-1">商品</th>
+									<th class="column-2">名前</th>
+									<th class="column-3">値段</th>
+									<th class="column-4">個数</th>
+									<th class="column-5">小計</th>
+									<th class="column-6"></th>
 								</tr>
 
 			<!---------------------------------------------------- 商品  ---->
@@ -337,12 +338,12 @@
 									<td class="column-4">
 										<?=$v["amount"]?>
 									</td>
-									<td class="column-5">$ 36.00</td>
-									<td>
+									<td class="column-5">&yen; <?=$v["item"]->price*$v["amount"]?></td>
+									<td calss="column-6">
 										<form action="/cart/delete" method="post">
 											<?= csrf_field()?>
 											<input type="hidden" name="delete_id" value="<?=$v["item"]->id?>">
-											<input type="submit" value="削除">
+											<input type="submit" value="削除" class="btn btn-outline-danger">
 										</form>
 									</td>
 								</tr>

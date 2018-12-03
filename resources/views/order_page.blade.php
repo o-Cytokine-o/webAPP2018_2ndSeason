@@ -249,37 +249,53 @@
 		<div class="form-group row">
 			<label for="form-name" class="col-sm-2 col-form-label col-form-label-sm">名前</label>
 			<div class="col-sm-10">
-			<input type="text" class="form-control form-control-sm" id="form-name"  name="name" placeholder="">
+				<input type="text" class="form-control {{$errors->has('name') ? 'is-invalid' : ''}} form-control-sm" id="form-name"  name="name" placeholder="" value="{{old('name')}}">
+				<div class="invalid-feedback">
+					{{$errors->first('name')}}
+				</div>
 			</div>
 		</div>
 		<div class="form-group row">
-			<label for="form-post" class="col-sm-2 col-form-label col-form-label-sm">住所</label>
+			<label for="form-post" class="col-sm-2 col-form-label col-form-label-sm">郵便番号</label>
 			<div class="col-sm-10">
-			<input type="text" class="form-control form-control-sm" id="form-post" name="post" placeholder="">
+				<input type="text" class="form-control {{$errors->has('post') ? 'is-invalid' : ''}} form-control-sm" id="form-post" name="post" placeholder="" value="{{old('post')}}">
+				<div class="invalid-feedback">
+				{{$errors->first('post')}}
+				</div>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="form-address" class="col-sm-2 col-form-label col-form-label-sm">住所</label>
 			<div class="col-sm-10">
-			<input type="text" class="form-control form-control-sm" id="form-address" name="address" placeholder="">
+				<input type="text" class="form-control {{$errors->has('address') ? 'is-invalid' : ''}} form-control-sm" id="form-address" name="address" placeholder="" value="{{old('address')}}">
+				<div class="invalid-feedback">
+					{{$errors->first('address')}}
+				</div>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="form-tel" class="col-sm-2 col-form-label col-form-label-sm">電話番号</label>
 			<div class="col-sm-10">
-			<input type="text" class="form-control form-control-sm" id="form-tel" name="tel" placeholder="">
+				<input type="text" class="form-control {{$errors->has('tel') ? 'is-invalid' : ''}} form-control-sm" id="form-tel" name="tel" placeholder="" value="{{old('tel')}}">
+				<div class="invalid-feedback">
+					{{$errors->first('tel')}}
+				</div>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="form-email" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
 			<div class="col-sm-10">
-			<input type="email" class="form-control form-control-sm" id="form-email" name="email" placeholder="">
+				<input type="email" class="form-control {{$errors->has('email') ? 'is-invalid' : ''}} form-control-sm" id="form-email" name="email" placeholder="" value="{{old('email')}}">
+				<div class="invalid-feedback">
+					{{$errors->first('email')}}
+				</div>
 			</div>
 		  </div>
 		  
 		  <input type="submit" class="btn btn-primary" value="注文">
-	
 </form>
+<p>{{$errors->first('name')}}</p>
+
 			
 			
 				
