@@ -243,58 +243,117 @@
 	</header>
 
 	<!-- Cart -->
-	<form action="/order" method="POST">
-	<?=csrf_field()?>
-	
-		<div class="form-group row">
-			<label for="form-name" class="col-sm-2 col-form-label col-form-label-sm">名前</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control {{$errors->has('name') ? 'is-invalid' : ''}} form-control-sm" id="form-name"  name="name" placeholder="" value="{{old('name')}}">
-				<div class="invalid-feedback">
-					{{$errors->first('name')}}
+	<div class="wrap-header-cart js-panel-cart">
+		<div class="s-full js-hide-cart"></div>
+
+		<div class="header-cart flex-col-l p-l-65 p-r-25">
+			<div class="header-cart-title flex-w flex-sb-m p-b-8">
+				<span class="mtext-103 cl2">
+					Your Cart
+				</span>
+
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+			
+			<div class="header-cart-content flex-w js-pscroll">
+				<ul class="header-cart-wrapitem w-full">
+					<?php $total=0;?>
+					<?php foreach($cartItems as $cartItem=>$v): ?>
+						<li class="header-cart-item flex-w flex-t m-b-12">
+							<div class="header-cart-item-img">
+								<img src="<?=$v["item"]->img?>" alt="IMG">
+							</div>
+
+							<div class="header-cart-item-txt p-t-8">
+								<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+									<?=$v["item"]->name?>
+								</a>
+
+								<span class="header-cart-item-info">
+								&yen;<?=$v["item"]->price*$v["amount"]?>
+								</span>
+							</div>
+						</li>
+						<?php $total += $v["item"]->price*$v["amount"] ?>
+					<?php endforeach; ?>
+				</ul>
+				
+				<div class="w-full">
+					<div class="header-cart-total w-full p-tb-40">
+						小計:&yen;<?=$total?>
+					</div>
+
+					<div class="header-cart-buttons flex-w w-full">
+						<a href="/cart/list" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							View Cart
+						</a>
+
+						<a href="/order" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="form-group row">
-			<label for="form-post" class="col-sm-2 col-form-label col-form-label-sm">郵便番号</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control {{$errors->has('post') ? 'is-invalid' : ''}} form-control-sm" id="form-post" name="post" placeholder="" value="{{old('post')}}">
-				<div class="invalid-feedback">
-				{{$errors->first('post')}}
+	</div>
+	<div class="order-wrap">
+		<form action="/order" method="POST">
+		<?=csrf_field()?>
+		
+			<div class="form-group row">
+				<label for="form-name" class="col-sm-2 col-form-label col-form-label-sm">名前</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control {{$errors->has('name') ? 'is-invalid' : ''}} form-control-sm" id="form-name"  name="name" placeholder="" value="{{old('name')}}">
+					<div class="invalid-feedback">
+						{{$errors->first('name')}}
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="form-group row">
-			<label for="form-address" class="col-sm-2 col-form-label col-form-label-sm">住所</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control {{$errors->has('address') ? 'is-invalid' : ''}} form-control-sm" id="form-address" name="address" placeholder="" value="{{old('address')}}">
-				<div class="invalid-feedback">
-					{{$errors->first('address')}}
+			<div class="form-group row">
+				<label for="form-post" class="col-sm-2 col-form-label col-form-label-sm">郵便番号</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control {{$errors->has('post') ? 'is-invalid' : ''}} form-control-sm" id="form-post" name="post" placeholder="" value="{{old('post')}}">
+					<div class="invalid-feedback">
+					{{$errors->first('post')}}
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="form-group row">
-			<label for="form-tel" class="col-sm-2 col-form-label col-form-label-sm">電話番号</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control {{$errors->has('tel') ? 'is-invalid' : ''}} form-control-sm" id="form-tel" name="tel" placeholder="" value="{{old('tel')}}">
-				<div class="invalid-feedback">
-					{{$errors->first('tel')}}
+			<div class="form-group row">
+				<label for="form-address" class="col-sm-2 col-form-label col-form-label-sm">住所</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control {{$errors->has('address') ? 'is-invalid' : ''}} form-control-sm" id="form-address" name="address" placeholder="" value="{{old('address')}}">
+					<div class="invalid-feedback">
+						{{$errors->first('address')}}
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="form-group row">
-			<label for="form-email" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
-			<div class="col-sm-10">
-				<input type="email" class="form-control {{$errors->has('email') ? 'is-invalid' : ''}} form-control-sm" id="form-email" name="email" placeholder="" value="{{old('email')}}">
-				<div class="invalid-feedback">
-					{{$errors->first('email')}}
+			<div class="form-group row">
+				<label for="form-tel" class="col-sm-2 col-form-label col-form-label-sm">電話番号</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control {{$errors->has('tel') ? 'is-invalid' : ''}} form-control-sm" id="form-tel" name="tel" placeholder="" value="{{old('tel')}}">
+					<div class="invalid-feedback">
+						{{$errors->first('tel')}}
+					</div>
 				</div>
 			</div>
-		  </div>
-		  
-		  <input type="submit" class="btn btn-primary" value="注文">
-</form>
-<p>{{$errors->first('name')}}</p>
+			<div class="form-group row">
+				<label for="form-email" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
+				<div class="col-sm-10">
+					<input type="email" class="form-control {{$errors->has('email') ? 'is-invalid' : ''}} form-control-sm" id="form-email" name="email" placeholder="" value="{{old('email')}}">
+					<div class="invalid-feedback">
+						{{$errors->first('email')}}
+					</div>
+				</div>
+			</div>
+			
+			<div class="chuumon">
+				<input type="submit" class="btn btn-primary" value="注文">
+			</div>
+	</form>
+</div>
+
 
 			
 			

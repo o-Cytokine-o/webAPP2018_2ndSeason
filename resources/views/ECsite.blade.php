@@ -42,31 +42,6 @@
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<!-- Topbar -->
-			<div class="top-bar">
-				<div class="content-topbar flex-sb-m h-full container">
-					<div class="left-top-bar">
-						Free shipping for standard order over $100
-					</div>
-
-					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							Help & FAQs
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
-						</a>
-					</div>
-				</div>
-			</div>
 
 			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop container">
@@ -259,28 +234,30 @@
 			
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
-					<?php foreach($cartItems as $cartItem): ?>
+					<?php $total=0;?>
+					<?php foreach($cartItems as $cartItem=>$v): ?>
 						<li class="header-cart-item flex-w flex-t m-b-12">
 							<div class="header-cart-item-img">
-								<img src="<?=$cartItem["item"]->img?>" alt="IMG">
+								<img src="<?=$v["item"]->img?>" alt="IMG">
 							</div>
 
 							<div class="header-cart-item-txt p-t-8">
 								<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								<?=$cartItem["item"]->name?>
+									<?=$v["item"]->name?>
 								</a>
 
 								<span class="header-cart-item-info">
-								&yen;<?=$cartItem["item"]->price?>
+								&yen;<?=$v["item"]->price*$v["amount"]?>
 								</span>
 							</div>
 						</li>
+						<?php $total += $v["item"]->price*$v["amount"] ?>
 					<?php endforeach; ?>
 				</ul>
 				
 				<div class="w-full">
 					<div class="header-cart-total w-full p-tb-40">
-						Total: $75.00
+						小計:&yen;<?=$total?>
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
@@ -308,13 +285,13 @@
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
 								<span class="ltext-101 cl2 respon2">
-									Women Collection 2018
+									クリスマスだロケランだ
 								</span>
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
 								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-									NEW SEASON
+									ロケラン入荷！！
 								</h2>
 							</div>
 								
@@ -332,13 +309,13 @@
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
 								<span class="ltext-101 cl2 respon2">
-									Men New-Season
+									年末セール
 								</span>
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
 								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-									Jackets & Coats
+									SR338
 								</h2>
 							</div>
 								
@@ -356,13 +333,13 @@
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
 								<span class="ltext-101 cl2 respon2">
-									Men Collection 2018
+									新商品入荷
 								</span>
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight" data-delay="800">
 								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-									New arrivals
+									ミニガン
 								</h2>
 							</div>
 								
@@ -384,14 +361,14 @@
 		<div class="container">
 			<div class="p-b-10">
 				<h3 class="ltext-103 cl5">
-					Product Overview
+					商品ラインナップ
 				</h3>
 			</div>
 
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-						All Products
+						すべての商品
 					</button>
 
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".ハンドガン">
@@ -406,12 +383,12 @@
 						サブマシンガン
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
-						Shoes
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".ガジェット">
+						ガジェット
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
-						Watches
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".その他">
+						その他
 					</button>
 				</div>
 
@@ -634,7 +611,7 @@
 <!------------------------ コンテンツ ------------------>
         <?php foreach($items as $item): ?>
 			
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?=$item->category?>">
+				<div class="item-height col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?=$item->category?>">
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">

@@ -1873,7 +1873,7 @@ input.num-product::-webkit-inner-spin-button {
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 9000;
+  z-index: 900;
   overflow: auto;
 
   -webkit-transition: all 0.4s;
@@ -3337,4 +3337,25 @@ input.num-product::-webkit-inner-spin-button {
 
 .header-details{
   margin-bottom: 200px;
+}
+.order-wrap {
+  width: 800px;
+  margin: 0 auto;
+}
+.chuumon {
+  display: block;
+  text-align: right;
+}
+.order-thanks a{
+  color: #fff;
+  width: 200px;
+}
+.bg-color {
+  background-color: darkseagreen;
+}
+.item-height {
+  height: 300px;
+}
+.hov-img0 img {
+  height: 180px;
 }

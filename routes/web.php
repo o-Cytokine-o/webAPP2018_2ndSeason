@@ -28,9 +28,11 @@ Route::get('/ecsite', function () {
 
 Route::get("/item/{id}",function($id){
     $items = DB::select("SELECT * FROM items where id = ?",[$id]);
+    $cartItems = session()->get("CART_ITEMS",[]);
     if(count($items) > 0){
         return view("item_details",[
-          "item" => $items[0]
+          "item" => $items[0],
+          "cartItems" => $cartItems
         ]);    
     }else{
         return abort(404);
@@ -127,7 +129,10 @@ Route::post("/cart/add/all",function(){
 });
 
 Route::get("/order_page",function(){
-    return view("order_page");
+    $cartItems = session()->get("CART_ITEMS",[]);
+    return view("order_page",[
+        "cartItems" => $cartItems
+    ]);
 });
 
 Route::post("/order",function(Request $request){
