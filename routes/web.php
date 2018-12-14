@@ -16,15 +16,26 @@ use Illuminate\Http\Request;
 
 Route::get('/ecsite', function () {
     $items = DB::select("SELECT * FROM items");
+    $itemsAll = DB::select("SELECT * FROM items");
     $cartItems = session()->get("CART_ITEMS",[]);
     return view('ECsite',[
         "items" => $items,
         "cartItems" => $cartItems,
-        
+        "itemsAll" => $itemsAll
     ]);
 });
 
-
+Route::post('/srchItem',function(){
+    $srchKey = request()->get("search-product");
+    $items = DB::select("select * from items where name = ?",[$srchKey]);
+    $itemsAll = DB::select("SELECT * FROM items");
+    $cartItems = session()->get("CART_ITEMS",[]);
+    return view("ECsite",[
+        "items" => $items,
+        "cartItems" => $cartItems,
+        "itemsAll" => $itemsAll
+    ]);
+});
 
 Route::get("/item/{id}",function($id){
     $items = DB::select("SELECT * FROM items where id = ?",[$id]);

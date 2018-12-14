@@ -3359,3 +3359,12 @@ input.num-product::-webkit-inner-spin-button {
 .hov-img0 img {
   height: 180px;
 }
+#suggest {
+  padding-left: 40px;
+  font-size: 20px;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+#suggest .over {
+  cursor: pointer;
+  background-color: rgba(0, 204, 255, 0.233);
+}

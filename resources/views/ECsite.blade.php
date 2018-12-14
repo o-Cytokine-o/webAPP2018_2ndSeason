@@ -34,6 +34,15 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+<script src="/suggest.js"></script>
+    <?php 
+        $jsonItems = json_encode($itemsAll);
+        $JsItems='';
+        foreach ($itemsAll as $key) {
+            $JsItems .= ','.$key->name;
+        }
+        $JsItems = substr($JsItems,1); 
+    ?>
 </head>
 <body class="animsition">
 	
@@ -407,14 +416,19 @@
 				</div>
 				
 				<!-- Search product -->
+				
 				<div class="dis-none panel-search w-full p-t-10 p-b-15">
 					<div class="bor8 dis-flex p-l-15">
+						
 						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
 							<i class="zmdi zmdi-search"></i>
 						</button>
-
-						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+						<form action="/srchItem" method="POST">
+							<?= csrf_field()?>
+							<input id="text" class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+						</form>
 					</div>	
+					<div id="suggest"></div>
 				</div>
 
 				<!-- Filter -->
@@ -783,5 +797,23 @@
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
 
+<!--===============================================================================================-->
+	<script>
+	/*----- Suggest 関数 -------*/
+        var name_str = '<?php echo $JsItems;?>';  //文字列を一度取得
+        var itemNamelist = name_str.split(',');
+        function startSuggest() {
+            
+        new Suggest.Local(
+                "text",    // 入力のエレメントID
+                "suggest", // 補完候補を表示するエリアのID
+                itemNamelist,      // 補完候補の検索対象となる配列
+                {dispMax: 10, interval: 500, listTagName:'tr'}); // オプション
+        }
+
+        window.addEventListener ?
+        window.addEventListener('load', startSuggest, false) :
+        window.attachEvent('onload', startSuggest);
+	</script>
 </body>
 </html>
