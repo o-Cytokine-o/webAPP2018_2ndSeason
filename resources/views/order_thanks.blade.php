@@ -221,7 +221,7 @@
 	<!-- Cart -->
 	<div class="order-thanks p-l-30">
 		<h1 class="order-thanks-h1">ご注文ありがとうございました</h1>	
-		<a class="flex-c-m bg-color cl0 size-101  bor1 hov-btn1 p-lr-15 trans-04 ">ホームに戻る</a>
+		<a href="/ecsite" class="flex-c-m bg-color cl0 size-101  bor1 hov-btn1 p-lr-15 trans-04 ">ホームに戻る</a>
 	</div>
 			
 				

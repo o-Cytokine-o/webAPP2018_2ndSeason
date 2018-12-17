@@ -361,7 +361,9 @@
 							</span>
 
 							<p class="stext-102 cl3 p-t-23">
-							<?=$item->description?>
+							概要：<?=$item->description?><br>
+							装弾数：<?=$item->amloaded?><br>
+							重量：<?=$item->weight?><br>
 							</p>
 							
 							<!--  -->

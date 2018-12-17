@@ -11,12 +11,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::insert("INSERT into items (name,img,description,price,category) VALUES (?,?,?,?,?)",[
+        DB::table("items")->truncate();
+        DB::insert("INSERT into items (name,img,description,price,category,amloaded,weight) VALUES (?,?,?,?,?,?,?)",[
             "M9",
             "https://hb-plaza.com/wp/wp-content/uploads/2015/05/ber_J92M9AOM.jpg",
             "スタンダードなM9です",
             "65000",
-            "ハンドガン"
+            "ハンドガン",
+            16,
+            950
         ]);
         
         DB::insert("INSERT into items (name,img,description,price,category) VALUES (?,?,?,?,?)",[
@@ -70,7 +73,15 @@ class DatabaseSeeder extends Seeder
             "250000",
             "アサルトライフル"
         ]);
-
+        DB::insert("INSERT into items (name,img,description,price,category,amloaded,weight) VALUES (?,?,?,?,?,?,?)",[
+            "M4A1",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLbRrbhepM3hUK8OanFnD31iLWe-RbWiZLKLN6Q5yTrRMpEVyAlw",
+            "アサルトライフルである。",
+            "220000",
+            "アサルトライフル",
+            30,
+            1000
+        ]);
         
     }
 }
